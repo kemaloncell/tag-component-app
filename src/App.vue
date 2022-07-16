@@ -5,6 +5,7 @@
       <span class="close">X</span>
     </span>
     <input type="text" @keydown.enter="addTag">
+    <div v-if="error" class="error">Bu etiket daha önceden eklenmiş!!</div>
   </div>
 </template>
 <script>
@@ -12,13 +13,27 @@
     name: 'App',
     data() {
       return {
-       tags:['deneme','deneme2']
+       tags:['deneme','deneme2'],
+        error:false
       }
     },
     methods:{
       addTag(event){
-        this.tags.push(event.target.value)
-        event.target.value = ''
+      let value = event.target.value
+      if(value.length > 0){
+        if(this.tags.includes(value.toLowerCase())){
+          this.error = true
+          setTimeout(() =>{
+            this.error = false
+          }, 2000);
+
+        }else{
+          this.tags.push(value)
+          this.error = false
+          event.target.value = ''
+        }
+      }
+
       }
     }
   }
@@ -37,6 +52,12 @@ input{
   height: 30px;
   width: 100px;
 }
+.error{
+  font-size: 12px;
+  color:red;
+  margin-top: 5px;
+}
+
 .tag{
   background-color: #fbbd08;
   padding: 10px;
