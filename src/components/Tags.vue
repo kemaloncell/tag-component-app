@@ -5,6 +5,8 @@
         :tag="tag"
         :index="index"
         @remove-one-tag="removeOneTag"
+        :tagColor="color"
+
     />
       <input
           type="text"
@@ -24,6 +26,11 @@ export default {
     value: {
       type: String,
       required: false
+    },
+    color:{
+      type: String,
+      required: false,
+      default:'primary'
     }
   },
   data() {
@@ -70,7 +77,7 @@ export default {
        this.tags = this.value.split(',')
      }
     }
-  }
+  },
 }
 </script>
 
