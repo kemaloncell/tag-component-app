@@ -1,6 +1,7 @@
 <template>
    <div class="container">
-       <Tags />
+       <Tags v-model="tags" />
+     {{tags}}
    </div>
 </template>
 <script>
@@ -10,6 +11,11 @@ import Tags from './components/Tags.vue'
     components: {
       Tags
     },
+    data(){
+      return{
+        tags:'test,test2'
+      }
+    }
   }
 </script>
 <style>

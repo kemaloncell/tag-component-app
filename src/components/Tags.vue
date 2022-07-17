@@ -8,6 +8,7 @@
     />
       <input
           type="text"
+          v-model="currentTag"
           @keydown.enter="addTag"
           @keydown.backspace="removeTag"
       >
@@ -20,10 +21,17 @@ export default {
   components: {
     Tag
   },
+  props: {
+    value: {
+      type: String,
+      required: false
+    }
+  },
   data() {
     return {
-      tags:['deneme','deneme2'],
-      error:false
+      tags:['denem2e','deneme2'],
+      error:false,
+      currentTag:null
     }
   },
   methods:{
@@ -51,6 +59,13 @@ export default {
     },
     removeOneTag(index){
       this.tags.splice(index,1)
+    }
+  },
+  created() {
+    if(this.value){
+     if(this.value.length > 0){
+       this.tags = this.value.split(',')
+     }
     }
   }
 }
