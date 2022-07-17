@@ -8,7 +8,6 @@
     />
       <input
           type="text"
-          v-model="currentTag"
           @keydown.enter="addTag"
           @keydown.backspace="removeTag"
       >
@@ -31,7 +30,6 @@ export default {
     return {
       tags:['denem2e','deneme2'],
       error:false,
-      currentTag:null
     }
   },
   methods:{
@@ -59,6 +57,11 @@ export default {
     },
     removeOneTag(index){
       this.tags.splice(index,1)
+    }
+  },
+  watch:{
+    tags(){
+      this.$emit('input', this.tags.join(','))
     }
   },
   created() {
